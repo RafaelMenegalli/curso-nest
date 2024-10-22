@@ -1,4 +1,5 @@
 import { IsEmail, IsString, IsNotEmpty, MinLength, IsStrongPassword } from "class-validator";
+import { IsUniqueEmail } from "src/validators/user/isUniqueEmailValidator";
 
 export class CreateUserDTO {
     @IsString({ message: "O campo de nome deve ser um texto!" })
@@ -6,6 +7,7 @@ export class CreateUserDTO {
     name: string;
 
     @IsEmail(undefined, { message: "Esse não é um email válido!" })
+    @IsUniqueEmail({ message: "Já existe um usuário com este e-mail!" })
     email: string;
 
     @IsStrongPassword()
